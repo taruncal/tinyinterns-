@@ -1,3 +1,5 @@
+"use client";
+
 import { ShieldCheck, Clock3, CheckCircle2 } from "lucide-react";
 import type { Candidate } from "@/lib/types";
 
@@ -22,12 +24,21 @@ const statusConfig = {
   },
 } as const;
 
-export default function CandidateCard({ candidate }: { candidate: Candidate }) {
+export default function CandidateCard({
+  candidate,
+  onSelect,
+}: {
+  candidate: Candidate;
+  onSelect?: (candidate: Candidate) => void;
+}) {
   const status = statusConfig[candidate.status];
   const StatusIcon = status.icon;
 
   return (
-    <div className="glass-panel relative overflow-hidden rounded-xl p-5 transition-colors hover:bg-white/[0.05]">
+    <div
+      onClick={() => onSelect?.(candidate)}
+      className="glass-panel relative cursor-pointer overflow-hidden rounded-xl p-5 transition-all hover:scale-[1.02] hover:border-violet-500/40 hover:bg-white/[0.05]"
+    >
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ink-800 text-sm font-semibold text-ink-300">
