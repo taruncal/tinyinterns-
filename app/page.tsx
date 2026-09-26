@@ -12,10 +12,18 @@ import MicroTasksBoard from "@/components/MicroTasksBoard";
 import { sampleCandidates, sampleTasks, timelineSteps } from "@/lib/sample-data";
 import SprintCalculator from "@/components/SprintCalculator";
 import InteractiveVettingSandbox from "@/components/InteractiveVettingSandbox";
+import IntakeModal from "@/components/IntakeModal";
 import type { Candidate } from "@/lib/types";
 
 export default function Home() {
   const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalRole, setModalRole] = useState<"founder" | "student">("founder");
+
+  const openIntake = (role: "founder" | "student") => {
+    setModalRole(role);
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-canvas">
@@ -50,20 +58,20 @@ export default function Home() {
           </p>
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <a
-              href="#vetting-sandbox"
-              className="flex items-center justify-center gap-1.5 rounded-md bg-violet-500 px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            <button
+              onClick={() => openIntake("student")}
+              className="flex items-center justify-center gap-1.5 rounded-md bg-violet-500 px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 cursor-pointer"
             >
               Apply for Batch 1 screening
               <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <a
-              href="#sprint-calculator"
-              className="glass-panel flex items-center justify-center gap-1.5 rounded-md px-5 py-3 text-sm font-semibold text-ink-100 transition-colors hover:bg-white/[0.06]"
+            </button>
+            <button
+              onClick={() => openIntake("founder")}
+              className="glass-panel flex items-center justify-center gap-1.5 rounded-md px-5 py-3 text-sm font-semibold text-ink-100 transition-colors hover:bg-white/[0.06] cursor-pointer"
             >
               <ShieldCheck className="h-4 w-4 text-cyan-400" />
               Hire pre-vetted talent
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -107,13 +115,13 @@ export default function Home() {
                 Click any candidate below to audit their verification benchmarks and reserve them for a sprint.
               </p>
             </div>
-            <a
-              href="#for-startups"
-              className="flex items-center gap-1 text-sm font-medium text-cyan-300 hover:text-cyan-200"
+            <button
+              onClick={() => openIntake("founder")}
+              className="flex items-center gap-1 text-sm font-medium text-cyan-300 hover:text-cyan-200 cursor-pointer"
             >
               Browse all vetted analysts
               <ArrowUpRight className="h-3.5 w-3.5" />
-            </a>
+            </button>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -157,6 +165,13 @@ export default function Home() {
       <section id="sprint-calculator" className="border-t border-ink-800">
         <SprintCalculator />
       </section>
+
+      {/* Lead Capture / Intake Modal */}
+      <IntakeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        defaultRole={modalRole}
+      />
 
       {/* Footer */}
       <footer className="border-t border-ink-800">
