@@ -26,9 +26,9 @@ export default function Home() {
     setIsModalOpen(true);
   };
 
-  return (
-    <div className="min-h-screen bg-canvas">
-      <Navbar />
+ return (
+  <div className="min-h-screen bg-canvas">
+    <Navbar onOpenIntake={openIntake} />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
