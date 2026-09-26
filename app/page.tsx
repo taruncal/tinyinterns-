@@ -5,6 +5,7 @@ import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import NetworkGraph from "@/components/NetworkGraph";
 import MetricsDock from "@/components/MetricsDock";
+import LiveActivityFeed from "@/components/LiveActivityFeed";
 import Timeline from "@/components/Timeline";
 import CandidateCard from "@/components/CandidateCard";
 import CandidateDrawer from "@/components/CandidateDrawer";
@@ -79,6 +80,11 @@ export default function Home() {
       {/* Docked metrics */}
       <div className="relative z-10 -mt-16 px-5 sm:px-8">
         <MetricsDock />
+      </div>
+
+      {/* Live Activity Ticker */}
+      <div className="mt-14">
+        <LiveActivityFeed />
       </div>
 
       {/* How it works */}
