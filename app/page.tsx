@@ -6,6 +6,7 @@ import Timeline from "@/components/Timeline";
 import CandidateCard from "@/components/CandidateCard";
 import MicroTasksBoard from "@/components/MicroTasksBoard";
 import { sampleCandidates, sampleTasks, timelineSteps } from "@/lib/sample-data";
+import SprintCalculator from "@/components/SprintCalculator";
 
 export default function Home() {
   return (
