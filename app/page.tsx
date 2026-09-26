@@ -44,14 +44,14 @@ export default function Home() {
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <a
-              href="#for-students"
+              href="#vetting-sandbox"
               className="flex items-center justify-center gap-1.5 rounded-md bg-violet-500 px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
               Apply for Batch 1 screening
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
-              href="#for-startups"
+              href="#sprint-calculator"
               className="glass-panel flex items-center justify-center gap-1.5 rounded-md px-5 py-3 text-sm font-semibold text-ink-100 transition-colors hover:bg-white/[0.06]"
             >
               <ShieldCheck className="h-4 w-4 text-cyan-400" />
@@ -81,6 +81,11 @@ export default function Home() {
             <Timeline steps={timelineSteps} />
           </div>
         </div>
+      </section>
+
+      {/* Interactive Vetting Sandbox Demo */}
+      <section id="vetting-sandbox" className="border-t border-ink-800">
+        <InteractiveVettingSandbox />
       </section>
 
       {/* Candidate Showcase Preview */}
@@ -130,6 +135,11 @@ export default function Home() {
             <MicroTasksBoard tasks={sampleTasks} />
           </div>
         </div>
+      </section>
+
+      {/* Interactive Sprint Calculator for Founders */}
+      <section id="sprint-calculator" className="border-t border-ink-800">
+        <SprintCalculator />
       </section>
 
       {/* Footer */}
