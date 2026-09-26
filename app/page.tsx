@@ -1,15 +1,22 @@
+"use client";
+
+import { useState } from "react";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import NetworkGraph from "@/components/NetworkGraph";
 import MetricsDock from "@/components/MetricsDock";
 import Timeline from "@/components/Timeline";
 import CandidateCard from "@/components/CandidateCard";
+import CandidateDrawer from "@/components/CandidateDrawer";
 import MicroTasksBoard from "@/components/MicroTasksBoard";
 import { sampleCandidates, sampleTasks, timelineSteps } from "@/lib/sample-data";
 import SprintCalculator from "@/components/SprintCalculator";
 import InteractiveVettingSandbox from "@/components/InteractiveVettingSandbox";
+import type { Candidate } from "@/lib/types";
 
 export default function Home() {
+  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
+
   return (
     <div className="min-h-screen bg-canvas">
       <Navbar />
@@ -61,7 +68,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Docked metrics — overlaps hero bottom edge */}
+      {/* Docked metrics */}
       <div className="relative z-10 -mt-16 px-5 sm:px-8">
         <MetricsDock />
       </div>
@@ -97,12 +104,11 @@ export default function Home() {
                 Analysts who already cleared the bar
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-500">
-                Every profile below passed a binary SQL, Python, and Power
-                BI assessment before we ever showed them a sprint.
+                Click any candidate below to audit their verification benchmarks and reserve them for a sprint.
               </p>
             </div>
             <a
-              href="#browse-candidates"
+              href="#for-startups"
               className="flex items-center gap-1 text-sm font-medium text-cyan-300 hover:text-cyan-200"
             >
               Browse all vetted analysts
@@ -112,11 +118,21 @@ export default function Home() {
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {sampleCandidates.map((candidate) => (
-              <CandidateCard key={candidate.id} candidate={candidate} />
+              <CandidateCard
+                key={candidate.id}
+                candidate={candidate}
+                onSelect={(cand) => setSelectedCandidate(cand)}
+              />
             ))}
           </div>
         </div>
       </section>
+
+      {/* Candidate Detail Drawer */}
+      <CandidateDrawer
+        candidate={selectedCandidate}
+        onClose={() => setSelectedCandidate(null)}
+      />
 
       {/* Sample Micro-Tasks Board */}
       <section id="for-students" className="border-t border-ink-800 py-20 sm:py-28">
@@ -137,7 +153,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Interactive Sprint Calculator for Founders */}
+      {/* Interactive Sprint Calculator */}
       <section id="sprint-calculator" className="border-t border-ink-800">
         <SprintCalculator />
       </section>
